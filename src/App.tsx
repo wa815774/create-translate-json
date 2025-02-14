@@ -1,3 +1,4 @@
+import "./App.css"
 import { useState } from 'react';
 import { bitable } from "@lark-base-open/js-sdk";
 import MyForm, { FormValues } from './components/MyForm';
@@ -20,8 +21,8 @@ export default function App() {
     const valuesField = await Promise.all(values.valuesField.map(f => table.getField(f)))
     const min = Math.max((values.range?.[0] || 0) - 1, 0)
     const max = values.range?.[1] || Number.MAX_SAFE_INTEGER
-    let cellOfKeys = (await Promise.all(recordIdList.map(c => keyFieid.getValue(c as any)))).filter(c => c)
-    cellOfKeys = cellOfKeys.slice(min, max)
+    let cellOfKeys = (await Promise.all(recordIdList.map(c => keyFieid.getValue(c as any))))
+    cellOfKeys = cellOfKeys.slice(min, max).filter(c => c)
     const cellOfValues = await
       Promise.all(
         valuesField.map(async (f) => {
@@ -43,8 +44,7 @@ export default function App() {
   }
 
   return (
-    <div style={{ padding: '24px' }}>
-
+    <div className='container'>
       <MyForm form={form} onFinish={handleFinish} />
       <CodePreview
         prefix={prefix}
