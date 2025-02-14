@@ -1,6 +1,6 @@
 {
-  "name": "React Template",
-  "version": "1.0.0",
+  "name": "create-translate-json-plugin",
+  "version": "1.2.0",
   "type": "module",
   "description": "React TypeScript on Replit, using Vite bundler",
   "scripts": {
@@ -26,6 +26,7 @@
     "@lark-opdev/block-bitable-api": "^0.4.0",
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",
+    "monaco-editor": "^0.50.0",
     "normalize.css": "^8.0.1",
     "react-i18next": "^13.2.2"
   }

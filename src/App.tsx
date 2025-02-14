@@ -1,19 +1,20 @@
 import "./App.css"
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { bitable } from "@lark-base-open/js-sdk";
-import MyForm, { FormValues } from './components/MyForm';
+import MyForm, { FormValues } from './components/Form/MyForm';
 import CodePreview from './components/CodePreview';
-import { Form } from "antd";
+import { Divider, Form, Typography } from "antd";
 
 
 export default function App() {
   const [form] = Form.useForm<FormValues>();
-  const [prefix, setPrefix] = useState('')
+  const [submitValue, setSubmitValue] = useState<FormValues>();
   const [cellOfKeys, setCellOfKeys] = useState<{ type: string; text: string }[][]>([])
   const [cellOfValues, setCellOfValues] = useState<{ name: string; id: string; cells: { type: string; text: string }[][] }[]>([])
+  const codePreviewRef = useRef<any>()
 
-  const handleFinish = async (values: FormValues) => {
-    // console.log('values', values)
+  const handleData = async (values: FormValues) => {
+    console.log('values', values)
     const table = await bitable.base.getTable(values.table)
     const view = await table.getViewById(values.view)
     const recordIdList = await view.getVisibleRecordIdList()
@@ -40,17 +41,38 @@ export default function App() {
     // console.log('cellOfValues', cellOfValues)
     setCellOfKeys(cellOfKeys)
     setCellOfValues(cellOfValues)
-    setPrefix(values.prefix || '')
+    setSubmitValue(values)
+  }
+
+  const handleFinish = async (values: FormValues) => {
+    await handleData(values)
+
+    setTimeout(() => {
+      codePreviewRef.current?.scrollIntoView()
+    }, 20)
+  }
+
+  const handleDownloadAll = async (values: FormValues) => {
+    await handleData(values)
+    setTimeout(() => {
+      codePreviewRef.current?.downloadAll()
+    }, 20)
   }
 
   return (
-    <div className='container'>
-      <MyForm form={form} onFinish={handleFinish} />
+    <>
+      <MyForm form={form} onFinish={handleFinish} onDownloadAll={handleDownloadAll} />
       <CodePreview
-        prefix={prefix}
+        ref={codePreviewRef}
+        mode={submitValue?.mode || ''}
+        prefix={submitValue?.prefix || ''}
+        regExp={submitValue?.regExp || ''}
+        replacement={submitValue?.replacement}
+        customKeyFn={submitValue?.customKeyFn}
+        isCheckKey={submitValue?.isCheckKey}
         cellOfKeys={cellOfKeys}
         cellOfValues={cellOfValues}
       />
-    </div>
+    </>
   );
 }
