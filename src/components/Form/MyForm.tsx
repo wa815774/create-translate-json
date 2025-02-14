@@ -64,7 +64,7 @@ const MyForm = ({ form, onFinish, onDownloadAll }: MyFormProps) => {
         className="sticky-tabs"
         name="mode"
       >
-        <ModeSelector className="form-item--mode" />
+        <ModeSelector className="form-item--mode" size="small" />
       </Form.Item>
 
       <Form.Item label="表格:" layout="horizontal">

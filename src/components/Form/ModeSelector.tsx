@@ -27,7 +27,7 @@ const list = [
 ]
 
 const ModeSelector = (props: RadioGroupProps) => {
-    return <Radio.Group defaultValue="default" size="small" {...props}>
+    return <Radio.Group defaultValue="default" {...props}>
         {list.map(l => (
             <Radio.Button value={l.value} key={l.value}>{l.title}</Radio.Button>
         ))}

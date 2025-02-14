@@ -44,16 +44,16 @@
 }
 
 
-.form-item--mode.ant-radio-group-small :where(.css-dev-only-do-not-override-7ny38l).ant-radio-button-wrapper {
-    padding-inline: 12px;
-    height: 28px;
-    line-height: 26px;
+.form-item--mode.ant-radio-group-small .ant-radio-button-wrapper {
+    padding-inline: 12px !important;
+    height: 28px !important;
+    line-height: 26px !important;
 }
-.form-item--mode.ant-radio-group-small :where(.css-dev-only-do-not-override-7ny38l).ant-radio-button-wrapper:first-child {
-    border-start-start-radius: 6px;
-    border-end-start-radius: 6px;
+.form-item--mode.ant-radio-group-small .ant-radio-button-wrapper:first-child {
+    border-start-start-radius: 6px !important;
+    border-end-start-radius: 6px !important;
 }
-.form-item--mode.ant-radio-group-small :where(.css-dev-only-do-not-override-7ny38l).ant-radio-button-wrapper:last-child {
-    border-start-end-radius: 6px;
-    border-end-end-radius: 6px;
+.form-item--mode.ant-radio-group-small .ant-radio-button-wrapper:last-child {
+    border-start-end-radius: 6px!important;
+    border-end-end-radius: 6px !important;
 }
