@@ -96,15 +96,10 @@ const CodePreview = ({
   ) => {
     try {
       let obj: Record<string, string> = {}
-      console.log(`cellOfKeys`, cellOfKeys);
-      console.log(`cellOfValues`, cellOfValues);
       cellOfKeys.forEach((c, i) => {
         const orginKey = getText(c)
-        console.log(`orginKey`, orginKey);
         let key = createKey(orginKey, obj)
-        console.log(`key`, key);
         const val = getText(values[i])
-        console.log(`val`, val);
         if (key) {
           obj[key] = val
         }
