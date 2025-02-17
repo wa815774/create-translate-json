@@ -96,10 +96,15 @@ const CodePreview = ({
   ) => {
     try {
       let obj: Record<string, string> = {}
+      console.log(`cellOfKeys`, cellOfKeys);
+      console.log(`cellOfValues`, cellOfValues);
       cellOfKeys.forEach((c, i) => {
-        const orginKey = c[0].text.trim()
+        const orginKey = getText(c)
+        console.log(`orginKey`, orginKey);
         let key = createKey(orginKey, obj)
-        const val = values[i]?.[0]?.text || ''
+        console.log(`key`, key);
+        const val = getText(values[i])
+        console.log(`val`, val);
         if (key) {
           obj[key] = val
         }
@@ -112,6 +117,14 @@ const CodePreview = ({
       console.log(e)
       return ''
     }
+  }
+
+  // 获取cell中的纯文本
+  const getText = (cell: { type: string, text: string }[]) => {
+    if (!cell || !Array.isArray(cell)) return ''
+    return cell.reduce((val, curVal) => {
+      return val + (curVal.text || '')
+    }, '')
   }
 
   // 每个field下的json
